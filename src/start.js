@@ -24,7 +24,7 @@ function createWindow() {
   })
 }
 
-app.on('ready', createWindow)
+app.on('ready', startwebapi)
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -32,8 +32,33 @@ app.on('window-all-closed', () => {
   }
 })
 
+function startwebapi() {
+  var proc = require('child_process').spawn;
+  //  run server
+  var webapipath = path.join(__dirname, '..\\api\\bin\\dist\\win\\dotnetcore.exe')
+  
+  webapiProcess = proc(webapipath)
+
+  webapiProcess.stdout.on('data', (data) => {
+    writeLog(`stdout: ${data}`);
+    if (mainWindow == null) {
+      createWindow();
+    }
+  });
+}
+
 app.on('activate', () => {
   if (mainWindow === null) {
     createWindow()
   }
 })
+
+//Kill process when electron exits
+process.on('exit', function () {
+  writeLog('exit');
+  webapiProcess.kill();
+});
+
+function writeLog(msg){
+  console.log(msg);
+}

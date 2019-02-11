@@ -44,6 +44,13 @@
     "extends": null,
     "directories": {
       "buildResources": "public"
+    },
+    "extraResources": {
+      "from": "api/bin/dist/",
+      "to": "api/bin/dist/",
+      "filter": [
+        "**/*"
+      ]
     }
   }
 }
