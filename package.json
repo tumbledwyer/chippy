@@ -12,6 +12,7 @@
     "start": "nf start -p 3000",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "test-ci": "react-scripts test --env=jsdom --coverage --testResultsProcessor=jest-teamcity-reporter",
     "eject": "react-scripts eject",
     "electron": "electron .",
     "electron-start": "node src/start-react",
@@ -30,8 +31,11 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "cypress": "^3.1.5",
     "electron": "^4.0.1",
-    "electron-builder": "^20.38.5"
+    "electron-builder": "^20.38.5",
+    "jest-teamcity-reporter": "^0.9.0",
+    "react-testing-library": "^5.8.0"
   },
   "homepage": "./",
   "main": "src/start.js",
